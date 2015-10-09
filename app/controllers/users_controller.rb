@@ -15,10 +15,10 @@ class UsersController < ApplicationController
 
   def create
     if User.find_by_user_id(user_params[:user_id]) != nil
-      flash[:notice] = {:class => 'flash_message', :body => "Sorry, this user ID is already taken. Try again."}
+      flash[:notice] = "Sorry, this user ID is already taken. Try again."
       redirect_to new_user_path
     else
-      flash[:notice] = {:class => 'flash_message', :body => "Welcome #{user_params[:user_id]}. Your account has been created."}
+      flash[:notice] = "Welcome #{user_params[:user_id]}. Your account has been created."
       User.create_user!(user_params)
       redirect_to login_path
     end
