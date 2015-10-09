@@ -1,0 +1,22 @@
+!!!
+%html
+  %head
+    %title Rotten Potatoes!
+    = stylesheet_link_tag 'application', 'media' => 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+
+  %body
+    %h1.title Rotten Potatoes!
+    -if !@current_user
+      = button_to "Sign Up/Login", login_path, :class => "button", :method => :get, :id => 'login'  
+    -else
+      %p You are logged in as #{@current_user.user_id}
+      = button_to "Logout", logout_path, :class => "button", :method => :delete, :id => 'logout'  
+    #main
+      - if flash[:notice]
+        #notice.flash_message= flash[:notice]
+      - elsif flash[:warning]
+        #warning.flash_message= flash[:warning]
+
+      = yield
